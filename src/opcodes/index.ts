@@ -24,6 +24,8 @@ import selfdestruct from "./selfdestruct";
 import sload from "./sload";
 import sstore from "./sstore";
 import staticcall from "./staticcall";
+import math from "./math";
+import cmp from "./cmp";
 
 export function parse(
   step: InterpreterStep,
@@ -58,6 +60,22 @@ export function parse(
       return sstore.parse(step);
     case "REVERT":
       return revert.parse(step);
+    case "ADD":
+    case "SUB":
+    case "MUL":
+    case "DIV":
+    case "MOD":
+    case "AND":
+    case "OR":
+    case "XOR":
+    case "EXP":
+    case "SHL":
+    case "SHR":
+      return math.parse(step);
+    case "LT":
+    case "GT":
+    case "EQ":
+      return cmp.parse(step);
     default:
       return;
   }
@@ -106,6 +124,22 @@ export async function format(
       return selfdestruct.format(item);
     case "EXCEPTION":
       return exception.format(item);
+    case "ADD":
+    case "SUB":
+    case "MUL":
+    case "DIV":
+    case "MOD":
+    case "AND":
+    case "OR":
+    case "XOR":
+    case "EXP":
+    case "SHL":
+    case "SHR":
+      return math.format(item);
+    case "LT":
+    case "GT":
+    case "EQ":
+      return cmp.format(item);
     default:
       return item.opcode + " not implemented";
   }

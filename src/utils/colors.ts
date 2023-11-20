@@ -16,6 +16,7 @@ export const colorSload = chalk.blueBright;
 export const colorSstore = chalk.redBright;
 export const colorNameTag = chalk.italic;
 export const colorIndexed = chalk.italic;
+export const colorSymbol = chalk.redBright;
 
 export const colorWarning = chalk.yellow;
 
